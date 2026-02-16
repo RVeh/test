@@ -1,7 +1,7 @@
 
 ## 🚀 Direkt starten mit Binder - kann einige Zeit dauern
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/RVeh/test/HEAD)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/RVeh/test_ci/HEAD)
 
 
 Im Menü `Run| Run all Cells` drücken, um die Programme zu starten.
