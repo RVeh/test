@@ -9,7 +9,7 @@ Im Menü `Run| Run all Cells` drücken, um die Programme zu starten.
 --- 
 
 ##  Inhalt
-Zwei Beispiel-Programme, zum Vortrag 
+Zwei ausgewählte Python-Programme, zum Vortrag 
 ###  Mehr als ein Testergebnis: Konfidenzintervalle im Unterricht erlebbar machen
 Von der Ja/Nein-Entscheidung des Hypothesentests zur Intervallschätzung – praxisnah mit Zollstock,
 Ellipse, GeoGebra und Python
