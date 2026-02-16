@@ -19,14 +19,9 @@ Reimund Vehling
 
 20.02.2026
 
-- 03_ablehnungsbereich.ipynb
+---
+- 02_ablehnungsbereich.ipynb
 - 01_ci_ellipse.ipynb 
-
-
-
-### 2. Ablehnungsbereich
-Darstellung eines zweiseitigen Ablehnungsbereichs
-für eine gegebene Setzung $\alpha$.
 
 --- 
 
