@@ -6,6 +6,16 @@
 
 Im Menü `Run| Run all Cells` drücken, um die Programme zu starten.
 
+## Hinweis zur Nutzung mit Binder
+
+Binder ist ein kostenloser Demonstrationsdienst mit begrenzten Ressourcen.
+Für stabiles Arbeiten empfiehlt es sich, pro Sitzung nur ein bis zwei,
+maximal drei Notebooks zu öffnen.
+
+Bei Bedarf kann der Kernel neu gestartet werden.
+Für den dauerhaften Einsatz sind lokale Python-Installationen
+oder institutionelle JupyterHub-Server besser geeignet.
+
 --- 
 
 ##  Inhalt
