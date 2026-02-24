@@ -223,6 +223,10 @@ def plot_pi(
     style: CIStyle,
     *,
     absolute: bool = False,
+    show_distribution: bool = False,
+    dist_scale: float = 0.25,
+    show_ci_slice: bool = False,
+    ci_h: float | None = None,
     save: str | None = None,
 ):
     """
@@ -279,14 +283,7 @@ def plot_pi(
     fig, ax = plt.subplots(figsize=style.figsize)
 
     # --- Ellipse (geometrischer Raum, leise) ---
-    ax.fill_between(
-        p,
-        g(p),
-        f(p),
-        color=style.area_color,
-        alpha=style.area_alpha,
-        zorder=0,
-    )
+    ax.fill_between(p,g(p),f(p),color=style.area_color,alpha=style.area_alpha,zorder=0)
 
     # --- Randkurven (rechnerische Grundlage) ---
     ax.plot(p, f(p), color=style.curve_upper, linewidth=1.0)
@@ -298,58 +295,63 @@ def plot_pi(
     else:
         y_L, y_R = h_L, h_R
         
-    ax.vlines(
-        model.p,
-        y_L,
-        y_R,
-        color=style.interval_color,
-        linewidth=2.5,
-        zorder=3,
-    )
+    ax.vlines(model.p,y_L,y_R,color=style.interval_color,linewidth=2.5,zorder=3)
 
     # --- Projektion des Intervalls ---
-    ax.vlines(
-        geometry.x_min,
-        y_L,
-        y_R,
-        color=style.interval_color,
-        linewidth=6,
-        alpha=0.7,
-        zorder=2,
-    )
+    ax.vlines(geometry.x_min,y_L,y_R,color=style.interval_color,linewidth=6,alpha=0.7,zorder=2)
 
     # --- Hilfslinien (gedacht) ---
-    ax.vlines(
-        model.p,
-        geometry.x_min,
-        geometry.x_max,
-        linestyle=":",
-        color=style.helper_lines,
-        linewidth=1.2,
-        alpha=0.8,
-    )
-    
-    ax.hlines(
-        [y_L, y_R],
-        geometry.x_min,
-        model.p,
-        linestyle=":",
-        color=style.helper_lines,
-        linewidth=1.2,
-        alpha=0.8,
-    )
+    ax.vlines(model.p,geometry.x_min,geometry.x_max,linestyle=":",color=style.helper_lines,linewidth=1.2,alpha=0.8)
+    ax.hlines([y_L, y_R],geometry.x_min,model.p,linestyle=":",color=style.helper_lines,linewidth=1.2,alpha=0.8)
 
     if absolute:
-        ax.vlines(
-            model.p,
-            0,
-            model.n,
-            linestyle=":",
-            color=style.helper_lines,
-            linewidth=1.2,
-            alpha=0.8,
-            zorder=1,
-        )
+        ax.vlines(model.p,0,model.n,linestyle=":",color=style.helper_lines,linewidth=1.2,alpha=0.8,zorder=1)
+
+    # --------------------------------------------------
+    # Optionale Stichprobenverteilung (relativ, gedreht)
+    # --------------------------------------------------
+    if show_distribution and not absolute:
+        from scipy.stats import binom
+
+        ks = np.arange(0, model.n + 1)
+        hs = ks / model.n
+        probs = binom.pmf(ks, model.n, model.p)
+
+        # nur Werte im Prognoseintervall
+        mask = (hs >= h_L) & (hs <= h_R)
+        hs = hs[mask]
+        probs = probs[mask]
+
+        if len(probs) > 0:
+            probs_norm = probs / probs.max()
+            max_len = dist_scale * (h_R - h_L)
+
+            for h_k, w in zip(hs, probs_norm):
+                ax.hlines(
+                    h_k,
+                    model.p - w * max_len,
+                    model.p,
+                    color="gray",
+                    linewidth=1.5,
+                    alpha=0.6,
+                    zorder=2,
+                )
+
+        # --------------------------------------------------
+        # Optional: leiser CI-Schnitt (horizontale Parallele)
+        # --------------------------------------------------
+        if show_ci_slice and (not absolute) and (ci_h is not None):
+            ax.hlines(
+                ci_h,
+                geometry.x_min,
+                geometry.x_max,
+                color="tab:green",
+                linestyle="--",
+                linewidth=1.,
+                alpha=0.5,
+                zorder=1,
+            )
+            
     # --------------------------------------------------
     # Achsen & Layout
     # --------------------------------------------------
