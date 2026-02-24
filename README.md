@@ -19,15 +19,14 @@ oder institutionelle JupyterHub-Server besser geeignet.
 --- 
 
 ##  Inhalt
-Zwei ausgewählte Python-Programme, zum Vortrag 
-###  Mehr als ein Testergebnis: Konfidenzintervalle im Unterricht erlebbar machen
+Programme Materialien zum Workshop
+###  Prognose-und Konfidenzintervalle - vom Verstehen zum Unterrichten
 
-Von der Ja/Nein-Entscheidung des Hypothesentests zur Intervallschätzung – praxisnah mit Zollstock,
-Ellipse, GeoGebra und Python
+32. Tage des mathematischen und naturwissenschaftlichen Unterrichts 24.-26.02.2026
 
 Reimund Vehling
 
-20.02.2026
+24.02.2026
 
 
 ## Ausführung
@@ -44,11 +43,11 @@ und einzelne Zellen erneut ausgeführt werden.
 
 Die zugrunde liegende Modulstruktur trennt konsequent:
 
-- Modell (Verteilung)
-- Geometrie (Ablehnungsbereich)
-- Entscheidung (p-Wert)
-- Darstellung (Plots)
-- Stil (Layout)
+- Modell 
+- Geometrie 
+- Entscheidung 
+- Darstellung 
+- Stil 
 
 Änderungen an Stil oder Setzungen wirken systemweit.
 
